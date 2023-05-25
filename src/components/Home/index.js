@@ -88,17 +88,19 @@ class Home extends Component {
       ],
     }
     return (
-      <Slider {...settings}>
-        {topRatedList.map(each => (
-          <li key={each.id}>
-            <Link to={`/books/${each.id}`}>
-              <img src={each.cover} alt={each.title} />
-              <h1>{each.title}</h1>
-              <p>{each.author}</p>
-            </Link>
-          </li>
-        ))}
-      </Slider>
+      <div>
+        <Slider {...settings}>
+          {topRatedList.map(each => (
+            <li key={each.id}>
+              <Link to={`/books/${each.id}`}>
+                <img src={each.cover} alt={each.title} />
+                <h1>{each.title}</h1>
+                <p>{each.author}</p>
+              </Link>
+            </li>
+          ))}
+        </Slider>
+      </div>
     )
   }
 
@@ -162,8 +164,8 @@ class Home extends Component {
                 </button>
               </li>
             </ul>
-            <div>{this.renderBookCard()}</div>
           </div>
+          <div>{this.renderPortView()}</div>
         </div>
         <Footer />
       </div>

@@ -33,13 +33,11 @@ class Header extends Component {
       <Link to="/shelf" className="nav-link">
         <li>Bookshelves</li>
       </Link>
-      <Link to="/login">
-        <li>
-          <button type="button" onClick={this.executeLogout}>
-            Logout
-          </button>
-        </li>
-      </Link>
+      <li>
+        <button type="button" onClick={this.executeLogout}>
+          Logout
+        </button>
+      </li>
     </ul>
   )
 

@@ -15,19 +15,6 @@ class Login extends Component {
     this.setState({password: event.target.value})
   }
 
-  onSubmitSuccess = jwtToken => {
-    Cookies.set('jwt_token', jwtToken, {expires: 1})
-    const {history} = this.props
-    history.replace('/')
-  }
-
-  onLoginFail = errorMsg => {
-    this.setState({
-      showLoginError: true,
-      error: errorMsg,
-    })
-  }
-
   onSubmitForm = async event => {
     event.preventDefault()
     const {username, password} = this.state
@@ -40,9 +27,16 @@ class Login extends Component {
     const response = await fetch(url, options)
     const data = await response.json()
     if (response.ok === true) {
-      this.onSubmitSuccess(data.jwt_token)
+      const jwtToken = data.jwt_token
+      Cookies.set('jwt_token', jwtToken, {expires: 1})
+      const {history} = this.props
+      history.replace('/')
     } else {
-      this.onLoginFail(data.error_msg)
+      const errorMsg = data.error_msg
+      this.setState({
+        showLoginError: true,
+        error: errorMsg,
+      })
     }
   }
 
@@ -55,12 +49,17 @@ class Login extends Component {
 
     return (
       <div className="login-container">
+        <img
+          src="https://res.cloudinary.com/dvu0weqay/image/upload/v1684910555/BookHub/Book_Login_ht1xto.png"
+          alt="website login"
+          className="book-image-sm"
+        />
+        <img
+          src="https://res.cloudinary.com/dvu0weqay/image/upload/v1685019697/BookHub/large-book_whkwwb.png"
+          alt="website login"
+          className="book-image-lg"
+        />
         <form onSubmit={this.onSubmitForm} className="login-form-card">
-          <img
-            src="https://res.cloudinary.com/dvu0weqay/image/upload/v1684910555/BookHub/Book_Login_ht1xto.png"
-            alt="website login"
-            className="book-image"
-          />
           <img
             src="https://res.cloudinary.com/dvu0weqay/image/upload/v1684910554/BookHub/BookHub_Logo_cszgu6.png"
             alt="login website logo"
