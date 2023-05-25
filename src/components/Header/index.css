@@ -1,0 +1,78 @@
+.nav-bar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  padding: 0 30px;
+  background-color: #ffffff;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0);
+  width: 100vw;
+  height: 80px;
+  border-radius: 13px;
+}
+.website-logo {
+  justify-self: start;
+  cursor: pointer;
+  margin-left: 0.2rem;
+  font-size: 1.6rem;
+}
+.nav-menu {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-gap: 10px;
+  list-style: none;
+  align-items: center;
+  text-align: center;
+  justify-content: end;
+}
+.nav-link {
+  text-decoration: none;
+  color: #64748b;
+  padding: 0.7rem 1rem;
+}
+.nav-link-img {
+  text-decoration: none;
+  color: #ffffff;
+  padding: 0.7rem 1rem;
+}
+.nav-link:hover {
+  background-color: #0284c7;
+  color: #ffffff;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+}
+.icon-button {
+  background-color: transparent;
+  border: 0px;
+  cursor: pointer;
+}
+.show-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.close-icon {
+  width: 60px;
+  align-self: end;
+}
+.mobile-screen {
+  display: none;
+}
+.small-container {
+  display: flex;
+  align-self: center;
+  justify-content: space-between;
+}
+.desktop-screen {
+  display: flex;
+}
+@media screen and (max-width: 850px) {
+  .desktop-screen {
+    display: none;
+    align-self: center;
+    justify-content: space-between;
+  }
+  .mobile-screen {
+    display: flex;
+  }
+}
