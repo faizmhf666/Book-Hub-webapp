@@ -122,12 +122,25 @@ class Bookshelves extends Component {
   )
 
   renderBooksList = () => {
-    const {requiredList} = this.state
+    const {searchText, requiredList} = this.state
+    const emptyList = requiredList.length === 0
     return (
       <div>
-        {requiredList.map(each => (
-          <BookshelvesItem detailsList={each} key={each.id} />
-        ))}
+        {emptyList ? (
+          <div>
+            <img
+              src="https://res.cloudinary.com/dvu0weqay/image/upload/v1684910554/BookHub/not_found_flqg6r.png"
+              alt="no books"
+            />
+            <p>Your search for {searchText} did not find any matches.</p>
+          </div>
+        ) : (
+          <div>
+            {requiredList.map(each => (
+              <BookshelvesItem detailsList={each} key={each.id} />
+            ))}
+          </div>
+        )}
       </div>
     )
   }
@@ -167,15 +180,15 @@ class Bookshelves extends Component {
   }
 
   render() {
-    const {searchText, requiredList, bookshelfName} = this.state
+    const {searchText, bookshelfName} = this.state
+    const bookShelfLabel = bookshelvesList.filter(
+      each => each.value === bookshelfName,
+    )
     const jwtToken = Cookies.get('jwt_token')
     if (jwtToken === undefined) {
       return <Redirect to="/login" />
     }
-    const emptyList = requiredList.length === 0
-    const bookShelfLabel = bookshelvesList.filter(
-      each => each.value === bookshelfName,
-    )
+
     return (
       <div>
         <Header />
@@ -198,17 +211,7 @@ class Bookshelves extends Component {
                 <BsSearch />
               </button>
             </div>
-            {emptyList ? (
-              <div>
-                <img
-                  src="https://res.cloudinary.com/dvu0weqay/image/upload/v1684910554/BookHub/not_found_flqg6r.png"
-                  alt="no books"
-                />
-                <p>Your search for {searchText} did not find any matches.</p>
-              </div>
-            ) : (
-              this.renderPortView()
-            )}
+            <div>{this.renderPortView()}</div>
           </div>
         </div>
         <Footer />

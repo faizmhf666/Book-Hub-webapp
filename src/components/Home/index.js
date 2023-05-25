@@ -162,7 +162,7 @@ class Home extends Component {
                 </button>
               </li>
             </ul>
-            {this.renderBookCard()}
+            <div>{this.renderBookCard()}</div>
           </div>
         </div>
         <Footer />
