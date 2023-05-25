@@ -1,6 +1,7 @@
 import {Component} from 'react'
 import Loader from 'react-loader-spinner'
-import {FaSearch} from 'react-icons/fa'
+import {Redirect} from 'react-router-dom'
+import {BsSearch} from 'react-icons/bs'
 import Cookies from 'js-cookie'
 import Header from '../Header'
 import Footer from '../Footer'
@@ -40,8 +41,8 @@ const callStatusCodes = {
 class Bookshelves extends Component {
   state = {
     requiredList: [],
-    bookshelfName: '',
-    apiCallStatus: callStatusCodes.loading,
+    bookshelfName: 'ALL',
+    apiCallStatus: '',
     searchText: '',
   }
 
@@ -53,8 +54,18 @@ class Bookshelves extends Component {
     this.setState({searchText: event.target.value})
   }
 
-  onSearchSubmit = event => {
-    event.preventDefault()
+  onSearchSubmit = () => {
+    this.setState(
+      prevState => ({searchText: prevState.searchText}),
+      this.getBookDetails,
+    )
+  }
+
+  changeBookshelf = e => {
+    this.setState({bookshelfName: e.target.value}, this.getBookDetails)
+  }
+
+  onTryAgain = () => {
     this.getBookDetails()
   }
 
@@ -91,6 +102,25 @@ class Bookshelves extends Component {
     }
   }
 
+  renderFilter = () => (
+    <div>
+      <h1>Bookshelves</h1>
+      <ul>
+        {bookshelvesList.map(each => (
+          <li key={each.id}>
+            <button
+              type="button"
+              value={each.value}
+              onClick={this.changeBookshelf}
+            >
+              {each.label}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+
   renderBooksList = () => {
     const {requiredList} = this.state
     return (
@@ -103,23 +133,23 @@ class Bookshelves extends Component {
   }
 
   renderLoadingView = () => (
-    <div className="loader-container" data-testid="loader">
+    <div className="loader-container" testid="loader">
       <Loader type="TailSpin" color="#0284C7" height={50} width={50} />
     </div>
   )
 
-  renderFailView = () => {
-    const {searchText} = this.state
-    return (
-      <div>
-        <img
-          src="https://res.cloudinary.com/dvu0weqay/image/upload/v1684910554/BookHub/not_found_flqg6r.png"
-          alt="error"
-        />
-        <p>Your search for {searchText} did not find any matches.</p>
-      </div>
-    )
-  }
+  renderFailView = () => (
+    <div>
+      <img
+        src="https://res.cloudinary.com/dvu0weqay/image/upload/v1684910554/BookHub/error_cvnfet.png"
+        alt="failure view"
+      />
+      <p>Something went wrong, Please try again.</p>
+      <button type="button" onClick={this.onTryAgain}>
+        Try Again
+      </button>
+    </div>
+  )
 
   renderPortView = () => {
     const {apiCallStatus} = this.state
@@ -137,24 +167,51 @@ class Bookshelves extends Component {
   }
 
   render() {
+    const {searchText, requiredList, bookshelfName} = this.state
+    const jwtToken = Cookies.get('jwt_token')
+    if (jwtToken === undefined) {
+      return <Redirect to="/login" />
+    }
+    const emptyList = requiredList.length === 0
+    const bookShelfLabel = bookshelvesList.filter(
+      each => each.value === bookshelfName,
+    )
     return (
       <div>
         <Header />
         <div>
-          <form onSubmit={this.onSearchSubmit}>
-            <h1>All Books</h1>
-            <input
-              type="search"
-              placeholder="search"
-              onChange={this.onSearchInput}
-            />
-            <button type="submit">
-              <FaSearch />
-            </button>
-          </form>
-          {this.renderPortView()}
-          <Footer />
+          <div>{this.renderFilter()}</div>
+          <div>
+            <div>
+              <h1>{bookShelfLabel[0].label} Books</h1>
+              <input
+                type="search"
+                placeholder="search"
+                onChange={this.onSearchInput}
+                value={searchText}
+              />
+              <button
+                type="button"
+                testid="searchButton"
+                onClick={this.onSearchSubmit}
+              >
+                <BsSearch />
+              </button>
+            </div>
+            {emptyList ? (
+              <div>
+                <img
+                  src="https://res.cloudinary.com/dvu0weqay/image/upload/v1684910554/BookHub/not_found_flqg6r.png"
+                  alt="no books"
+                />
+                <p>Your search for {searchText} did not find any matches.</p>
+              </div>
+            ) : (
+              this.renderPortView()
+            )}
+          </div>
         </div>
+        <Footer />
       </div>
     )
   }

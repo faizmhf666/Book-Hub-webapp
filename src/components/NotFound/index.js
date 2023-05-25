@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom'
 
 const NotFound = () => {
   const imageUrlNotFound =
-    'https://assets.ccbp.in/frontend/react-js/jobby-app-not-found-img.png'
+    'https://res.cloudinary.com/dvu0weqay/image/upload/v1684910553/BookHub/Page_not_found_vpjziu.png'
   return (
     <div className="not-found-container">
       <img src={imageUrlNotFound} alt="not found" />
