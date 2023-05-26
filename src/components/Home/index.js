@@ -5,6 +5,7 @@ import Slider from 'react-slick'
 import Loader from 'react-loader-spinner'
 import Header from '../Header'
 import Footer from '../Footer'
+import './index.css'
 
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -68,14 +69,14 @@ class Home extends Component {
       dots: false,
       infinite: false,
       autoplay: true,
-      slidesToScroll: 1,
+      slidesToScroll: 3,
       slidesToShow: 4,
       responsive: [
         {
           breakpoint: 1024,
           settings: {
             slidesToShow: 3,
-            slidesToScroll: 1,
+            slidesToScroll: 2,
           },
         },
         {
@@ -88,14 +89,20 @@ class Home extends Component {
       ],
     }
     return (
-      <div>
+      <div className="slider-container">
         <Slider {...settings}>
           {topRatedList.map(each => (
-            <li key={each.id}>
-              <Link to={`/books/${each.id}`}>
-                <img src={each.cover} alt={each.title} />
-                <h1>{each.title}</h1>
-                <p>{each.author}</p>
+            <li key={each.id} className="home-book-item">
+              <Link to={`/books/${each.id}`} className="nav-link">
+                <div className="top-rated-book-container">
+                  <img
+                    src={each.cover}
+                    alt={each.title}
+                    className="cover-image"
+                  />
+                  <h1 className="home-book-title">{each.title}</h1>
+                  <p className="home-book-author">{each.author}</p>
+                </div>
               </Link>
             </li>
           ))}
@@ -111,13 +118,14 @@ class Home extends Component {
   )
 
   renderFailView = () => (
-    <div>
+    <div className="failure-view-container">
       <img
         src="https://res.cloudinary.com/dvu0weqay/image/upload/v1684910554/BookHub/error_cvnfet.png"
         alt="failure view"
+        className="failure-image"
       />
-      <p>Something went wrong, Please try again.</p>
-      <button type="button" onClick={this.onTryAgain}>
+      <p className="failure-para">Something went wrong, Please try again.</p>
+      <button className="find-btn" type="button" onClick={this.onTryAgain}>
         Try Again
       </button>
     </div>
@@ -144,30 +152,36 @@ class Home extends Component {
       return <Redirect to="/login" />
     }
     return (
-      <div>
+      <div className="home-main-container">
         <Header />
-        <h1>Find Your Next Favorite Books?</h1>
-        <p>
-          You are in the right place. Tell us what titles or genres you have
-          enjoyed in the past, and we will give you surprisingly insightful
-          recommendations.
-        </p>
-        <div>
-          <div>
-            <ul>
-              <li>
-                <h1>Top Rated Books</h1>
+        <div className="home-body">
+          <div className="home-top-container">
+            <h1 className="home-heading">Find Your Next Favorite Books?</h1>
+            <p className="home-para">
+              You are in the right place. Tell us what titles or genres you have
+              enjoyed in the past, and we will give you surprisingly insightful
+              recommendations.
+            </p>
+          </div>
+          <div className="home-bottom-container">
+            <div className="head-button-list">
+              <li className="list-item">
+                <h1 className="list-heading">Top Rated Books</h1>
               </li>
-              <li>
-                <button type="button" onClick={this.onClickFindBooks}>
+              <li className="list-item">
+                <button
+                  type="button"
+                  className="find-btn"
+                  onClick={this.onClickFindBooks}
+                >
                   Find Books
                 </button>
               </li>
-            </ul>
+            </div>
+            <div>{this.renderPortView()}</div>
           </div>
-          <div>{this.renderPortView()}</div>
+          <Footer />
         </div>
-        <Footer />
       </div>
     )
   }

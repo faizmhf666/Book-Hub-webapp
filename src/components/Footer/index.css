@@ -1,0 +1,18 @@
+.contact-us-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.footer-icon {
+  cursor: pointer;
+  margin-right: 2px;
+  width: 24px;
+}

@@ -9,6 +9,7 @@ import './index.css'
 class Header extends Component {
   state = {
     isClicked: false,
+    activeId: '',
   }
 
   showNavButton = () => {
@@ -25,21 +26,46 @@ class Header extends Component {
     history.replace('/login')
   }
 
-  renderSmallScreen = () => (
-    <ul className="nav-menu">
-      <Link to="/" className="nav-link">
-        <li>Home</li>
-      </Link>
-      <Link to="/shelf" className="nav-link">
-        <li>Bookshelves</li>
-      </Link>
-      <li>
-        <button type="button" onClick={this.executeLogout}>
-          Logout
-        </button>
-      </li>
-    </ul>
-  )
+  changeActiveIdShelf = () => {
+    this.setState({activeId: 'shelf'})
+  }
+
+  changeActiveIdHome = () => {
+    this.setState({activeId: 'home'})
+  }
+
+  renderSmallScreen = () => {
+    const {activeId} = this.state
+    return (
+      <ul className="nav-menu">
+        <Link to="/" className="nav-link">
+          <li
+            onClick={this.changeActiveIdHome}
+            className={activeId === 'home' ? 'active-tab' : 'tab-item'}
+          >
+            Home
+          </li>
+        </Link>
+        <Link to="/shelf" className="nav-link">
+          <li
+            onClick={this.changeActiveIdShelf}
+            className={activeId === 'shelf' ? 'active-tab' : 'tab-item'}
+          >
+            Bookshelves
+          </li>
+        </Link>
+        <li>
+          <button
+            type="button"
+            className="logout-btn"
+            onClick={this.executeLogout}
+          >
+            Logout
+          </button>
+        </li>
+      </ul>
+    )
+  }
 
   render() {
     const {isClicked} = this.state
@@ -71,22 +97,19 @@ class Header extends Component {
             <GiHamburgerMenu />
           </button>
         </div>
-        <hr />
         <div className="small-container">
-          {isClicked ? (
+          {isClicked && (
             <div className="show-buttons">
               {this.renderSmallScreen()}
-              <div>
-                <button
-                  type="button"
-                  onClick={this.hideNavButton}
-                  className="icon-button"
-                >
-                  <AiFillCloseCircle className="close-icon" />
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={this.hideNavButton}
+                className="icon-button x-btn"
+              >
+                <AiFillCloseCircle className="close-icon" />
+              </button>
             </div>
-          ) : null}
+          )}
         </div>
       </nav>
     )

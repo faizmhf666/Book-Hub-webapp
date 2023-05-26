@@ -1,0 +1,150 @@
+.home-main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: 'roboto';
+}
+.home-body {
+  background-color: #e5e5e5;
+  padding: 30px;
+}
+.home-top-container {
+  padding: 28px;
+}
+.head-button-list {
+  display: flex;
+  justify-content: space-between;
+}
+.list-item {
+  list-style: none;
+  margin-bottom: 20px;
+}
+.home-bottom-container {
+  margin-top: 20px;
+  padding: 30px;
+  background-color: #ffffff;
+}
+.list-heading {
+  font-size: 16px;
+  color: #1e293b;
+}
+.find-btn {
+  padding: 5px;
+  border: 0.5px solid transparent;
+  color: #ffffff;
+  background-color: #0284c7;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+.failure-view-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.nav-link:hover {
+  background-color: #ffffff;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+}
+.nav-link {
+  text-decoration: none;
+  color: #334155;
+  padding: 0.7rem 1rem;
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.slider-container {
+  justify-content: center;
+  align-items: center;
+}
+.top-rated-book-container {
+  display: flex;
+  margin-left: 5px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-book-title {
+  margin-top: 10px;
+  font-size: 18px;
+}
+.home-book-author {
+  font-size: 14px;
+}
+
+@media screen and (max-width: 991px) {
+  .home-heading {
+    font-family: 'roboto';
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .head-button-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .failure-image {
+    width: 184px;
+    margin-bottom: 14px;
+  }
+  .cover-image {
+    width: 60px;
+  }
+  .home-book-item {
+    margin-left: 8px;
+  }
+  .top-rated-book-container {
+    margin-left: 10px;
+  }
+  .home-book-title {
+    margin-top: 10px;
+    font-size: 16px;
+    text-align: center;
+  }
+  .home-book-author {
+    font-size: 12px;
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .head-button-list {
+    display: flex;
+    justify-content: space-between;
+  }
+  .failure-image {
+    width: 288px;
+    margin-bottom: 18px;
+  }
+  .home-heading {
+    font-family: 'roboto';
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .home-book-item {
+    margin-left: 8px;
+  }
+  .top-rated-book-container {
+    margin-left: 10px;
+  }
+  .home-book-title {
+    margin-top: 10px;
+    font-size: 18px;
+    text-align: center;
+  }
+  .home-book-author {
+    font-size: 14px;
+    text-align: center;
+  }
+  .cover-image {
+    width: 180px;
+  }
+}
