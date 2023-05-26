@@ -2,7 +2,7 @@ import {Component} from 'react'
 import Cookies from 'js-cookie'
 import {Redirect} from 'react-router-dom'
 
-// import './index.css'
+import './index.css'
 
 class Login extends Component {
   state = {username: '', password: '', showLoginError: false, error: ''}
@@ -59,39 +59,41 @@ class Login extends Component {
           alt="website login"
           className="book-image-lg"
         />
-        <form onSubmit={this.onSubmitForm} className="login-form-card">
-          <img
-            src="https://res.cloudinary.com/dvu0weqay/image/upload/v1684910554/BookHub/BookHub_Logo_cszgu6.png"
-            alt="login website logo"
-            className="website-logo"
-          />
-          <label htmlFor="username" className="form-label">
-            USERNAME
-          </label>
-          <input
-            type="text"
-            id="username"
-            onChange={this.inputUsername}
-            value={username}
-            placeholder="Username"
-            className="input-box"
-          />
-          <label htmlFor="password" className="form-label">
-            PASSWORD
-          </label>
-          <input
-            type="password"
-            id="password"
-            onChange={this.inputPassword}
-            value={password}
-            placeholder="Password"
-            className="input-box"
-          />
-          <button type="submit" className="submit-btn">
-            Login
-          </button>
-          {showLoginError && <p className="error-message">*{error}</p>}
-        </form>
+        <div className="form-container">
+          <form onSubmit={this.onSubmitForm} className="login-form-card">
+            <img
+              src="https://res.cloudinary.com/dvu0weqay/image/upload/v1684910554/BookHub/BookHub_Logo_cszgu6.png"
+              alt="login website logo"
+              className="website-logo"
+            />
+            <label htmlFor="username" className="form-label">
+              Username*
+            </label>
+            <input
+              type="text"
+              id="username"
+              onChange={this.inputUsername}
+              value={username}
+              placeholder="Username"
+              className="input-box"
+            />
+            <label htmlFor="password" className="form-label">
+              Password*
+            </label>
+            <input
+              type="password"
+              id="password"
+              onChange={this.inputPassword}
+              value={password}
+              placeholder="Password"
+              className="input-box"
+            />
+            {showLoginError && <p className="error-message">*{error}</p>}
+            <button type="submit" className="submit-btn">
+              Login
+            </button>
+          </form>
+        </div>
       </div>
     )
   }

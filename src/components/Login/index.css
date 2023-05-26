@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.login-container {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-form-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.website-logo {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.form-label {
+  font-family: 'roboto';
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+.login-form-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.error-message {
+  align-self: flex-start;
+  color: #ef4444;
+  font-weight: 400;
+  font-family: 'roboto';
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+.input-box {
+  background-color: #ffffff;
+  padding: 4px;
+  border-radius: 5px;
+  border: 0.5px solid;
+}
+.submit-btn {
+  padding: 5px;
+  border: 0.5px solid transparent;
+  color: #ffffff;
+  background-color: #0284c7;
+  margin-top: 16px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* large screen */
+@media screen and (min-width: 992px) {
+  .login-container {
+    justify-content: flex-start;
+  }
+  .book-image-sm {
+    display: none;
+  }
+  .book-image-lg {
+    width: 50vw;
+    height: 100vh;
+    margin-right: 98px;
+  }
+  .login-form-card {
+    margin-left: 98px;
+  }
+  .form-label {
+    font-size: 16px;
+    align-self: flex-start;
+  }
+  .error-message {
+    font-size: 14px;
+  }
+}
+/* small screen */
+@media screen and (max-width: 991px) {
+  .login-container {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .book-image-lg {
+    display: none;
+  }
+  .book-image-sm {
+    width: 100px;
+  }
+  .form-label {
+    font-size: 14px;
+    align-self: flex-start;
+  }
+  .error-message {
+    font-size: 12px;
+  }
+}
