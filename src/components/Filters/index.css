@@ -1,0 +1,53 @@
+@media screen and (max-width: 991px) {
+  .selected-btn {
+    cursor: pointer;
+    padding: 5px;
+    border: 0.5px solid transparent;
+    text-align: center;
+    align-self: center;
+    color: #ffffff;
+    background-color: #0284c7;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  .shelf-btn {
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid #0284c7;
+    align-self: center;
+    color: #0284c7;
+    background-color: #ffffff;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+}
+.list-style {
+  list-style: none;
+  font-family: 'roboto';
+}
+.btn {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+@media screen and (min-width: 992px) {
+  .selected-btn {
+    cursor: pointer;
+    padding: 5px;
+    border: 0px solid transparent;
+    align-self: center;
+    color: #0284c7;
+    background-color: transparent;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  .shelf-btn {
+    cursor: pointer;
+    padding: 5px;
+    border: 0px solid transparent;
+    align-self: center;
+    color: #475569;
+    background-color: transparent;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+}

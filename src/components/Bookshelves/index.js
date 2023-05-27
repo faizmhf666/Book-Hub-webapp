@@ -5,7 +5,10 @@ import {BsSearch} from 'react-icons/bs'
 import Cookies from 'js-cookie'
 import Header from '../Header'
 import Footer from '../Footer'
+import Filters from '../Filters'
 import BookshelvesItem from '../BookshelvesItem'
+
+import './index.css'
 
 // use the below bookshelvesList for rendering read status of book items in Bookshelves Route
 
@@ -41,9 +44,9 @@ const callStatusCodes = {
 class Bookshelves extends Component {
   state = {
     requiredList: [],
-    bookshelfName: 'ALL',
     apiCallStatus: '',
     searchText: '',
+    activeId: bookshelvesList[0].id,
   }
 
   componentDidMount() {
@@ -61,8 +64,8 @@ class Bookshelves extends Component {
     )
   }
 
-  changeBookshelf = e => {
-    this.setState({bookshelfName: e.target.value}, this.getBookDetails)
+  changeBookshelf = id => {
+    this.setState({activeId: id}, this.getBookDetails)
   }
 
   onTryAgain = () => {
@@ -71,7 +74,11 @@ class Bookshelves extends Component {
 
   getBookDetails = async () => {
     this.setState({apiCallStatus: callStatusCodes.loading})
-    const {bookshelfName, searchText} = this.state
+    const {activeId, searchText} = this.state
+    const bookshelfNameDetails = bookshelvesList.filter(
+      each => each.id === activeId,
+    )
+    const bookshelfName = bookshelfNameDetails[0].value
     const jwtToken = Cookies.get('jwt_token')
     const apiUrl = `https://apis.ccbp.in/book-hub/books?shelf=${bookshelfName}&search=${searchText}`
     const options = {
@@ -90,6 +97,7 @@ class Bookshelves extends Component {
         rating: each.rating,
         author: each.author_name,
         cover: each.cover_pic,
+        total: response.total,
       }))
       this.setState({
         requiredList: updatedData,
@@ -102,24 +110,24 @@ class Bookshelves extends Component {
     }
   }
 
-  renderFilter = () => (
-    <div>
-      <h1>Bookshelves</h1>
-      <ul>
-        {bookshelvesList.map(each => (
-          <li key={each.id}>
-            <button
-              type="button"
-              value={each.value}
-              onClick={this.changeBookshelf}
-            >
-              {each.label}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
+  renderFilter = () => {
+    const {activeId} = this.state
+    return (
+      <div className="filter-section">
+        <h1 className="filters-heading">Bookshelves</h1>
+        <div className="filter-container">
+          {bookshelvesList.map(each => (
+            <Filters
+              bookShelfListDetails={each}
+              key={each.id}
+              changeBookshelf={this.changeBookshelf}
+              isActive={activeId === each.id}
+            />
+          ))}
+        </div>
+      </div>
+    )
+  }
 
   renderBooksList = () => {
     const {searchText, requiredList} = this.state
@@ -127,17 +135,22 @@ class Bookshelves extends Component {
     return (
       <div>
         {emptyList ? (
-          <div>
+          <div className="no-books-container">
             <img
               src="https://res.cloudinary.com/dvu0weqay/image/upload/v1684910554/BookHub/not_found_flqg6r.png"
               alt="no books"
+              className="no-books-img"
             />
-            <p>Your search for {searchText} did not find any matches.</p>
+            <p className="no-books-text">
+              Your search for {searchText} did not find any matches.
+            </p>
           </div>
         ) : (
-          <div>
+          <div className="bookshelves-item-container">
             {requiredList.map(each => (
-              <BookshelvesItem detailsList={each} key={each.id} />
+              <div className="bookshelves-item-div">
+                <BookshelvesItem detailsList={each} key={each.id} />
+              </div>
             ))}
           </div>
         )}
@@ -152,13 +165,14 @@ class Bookshelves extends Component {
   )
 
   renderFailView = () => (
-    <div>
+    <div className="failure-container">
       <img
         src="https://res.cloudinary.com/dvu0weqay/image/upload/v1684910554/BookHub/error_cvnfet.png"
         alt="failure view"
+        className="failure-img"
       />
       <p>Something went wrong, Please try again.</p>
-      <button type="button" onClick={this.onTryAgain}>
+      <button type="button" className="failure-btn" onClick={this.onTryAgain}>
         Try Again
       </button>
     </div>
@@ -180,10 +194,8 @@ class Bookshelves extends Component {
   }
 
   render() {
-    const {searchText, bookshelfName} = this.state
-    const bookShelfLabel = bookshelvesList.filter(
-      each => each.value === bookshelfName,
-    )
+    const {searchText, activeId} = this.state
+    const bookShelfLabel = bookshelvesList.filter(each => each.id === activeId)
     const jwtToken = Cookies.get('jwt_token')
     if (jwtToken === undefined) {
       return <Redirect to="/login" />
@@ -192,24 +204,47 @@ class Bookshelves extends Component {
     return (
       <div>
         <Header />
-        <div>
+        <div className="bookshelves-main-container">
+          <div className="top-search">
+            <input
+              type="search"
+              placeholder="search"
+              onChange={this.onSearchInput}
+              value={searchText}
+              className="search-input"
+            />
+            <button
+              type="button"
+              testid="searchButton"
+              onClick={this.onSearchSubmit}
+              className="search-button"
+            >
+              <BsSearch />
+            </button>
+          </div>
           <div>{this.renderFilter()}</div>
-          <div>
-            <div>
-              <h1>{bookShelfLabel[0].label} Books</h1>
-              <input
-                type="search"
-                placeholder="search"
-                onChange={this.onSearchInput}
-                value={searchText}
-              />
-              <button
-                type="button"
-                testid="searchButton"
-                onClick={this.onSearchSubmit}
-              >
-                <BsSearch />
-              </button>
+          <div className="non-filter-container">
+            <div className="bookshelves-label-search">
+              <h1 className="bookshelves-label-text">
+                {bookShelfLabel[0].label} Books
+              </h1>
+              <div className="bottom-search">
+                <input
+                  type="search"
+                  placeholder="search"
+                  onChange={this.onSearchInput}
+                  value={searchText}
+                  className="search-input"
+                />
+                <button
+                  type="button"
+                  testid="searchButton"
+                  onClick={this.onSearchSubmit}
+                  className="search-button"
+                >
+                  <BsSearch />
+                </button>
+              </div>
             </div>
             <div>{this.renderPortView()}</div>
           </div>
