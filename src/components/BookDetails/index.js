@@ -67,9 +67,9 @@ class BookDetails extends Component {
     return (
       <div>
         <div className="details-card-container">
-          <div className="shelf-item-container">
+          <div className="details-item-container">
             <img
-              className="shelf-img"
+              className="details-img"
               src={bookDetailsList.cover}
               alt={bookDetailsList.title}
             />
@@ -90,10 +90,10 @@ class BookDetails extends Component {
           </div>
           <hr />
           <div className="additional-details">
-            <h2>About Author</h2>
-            <p>{bookDetailsList.aboutAuthor}</p>
-            <h2>About Book</h2>
-            <p>{bookDetailsList.aboutBook}</p>
+            <h2 className="about-author">About Author</h2>
+            <p className="author-details">{bookDetailsList.aboutAuthor}</p>
+            <h2 className="about-author">About Book</h2>
+            <p className="author-details">{bookDetailsList.aboutBook}</p>
           </div>
         </div>
         <Footer />

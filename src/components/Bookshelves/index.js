@@ -54,7 +54,7 @@ class Bookshelves extends Component {
   }
 
   onSearchInput = event => {
-    this.setState({searchText: event.target.value})
+    this.setState({searchText: event.target.value}, this.getBookDetails)
   }
 
   onSearchSubmit = () => {
