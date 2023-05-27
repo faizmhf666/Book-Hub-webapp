@@ -90,7 +90,9 @@
 .bookshelves-item-container {
   display: flex;
   flex-wrap: wrap;
+  flex-basis: 50%;
 }
+
 .bookshelves-item-div {
-  width: 360px;
+  width: 480px;
 }

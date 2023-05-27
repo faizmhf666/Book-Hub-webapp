@@ -8,9 +8,7 @@
   border-radius: 4px;
   transition: all 0.2s ease-in-out;
 }
-.shelf-item-list {
-  list-style: none;
-}
+
 .logout-btn {
   cursor: pointer;
   padding: 5px;
@@ -21,10 +19,11 @@
   border-radius: 6px;
   font-size: 14px;
 }
+.shelf-item-list {
+  list-style: none;
+}
 .shelf-item-container {
   display: flex;
-  flex-wrap: wrap;
-
   justify-content: center;
   align-items: center;
 }
@@ -43,15 +42,15 @@
 .title {
   color: #334155;
   text-align: left;
-  font-size: 22px;
+  font-size: 16px;
 }
 .author {
   color: #475569;
-  font-size: 18px;
+  font-size: 12px;
 }
 .rating {
   color: #475569;
-  font-size: 14px;
+  font-size: 12px;
 }
 .star {
   color: #fbbf24;
@@ -59,7 +58,7 @@
 }
 .read-status {
   color: #0284c7;
-  font-size: 14px;
+  font-size: 12px;
 }
 @media screen and (max-width: 991px) {
   .details-container {
@@ -73,18 +72,18 @@
     width: 110px;
   }
   .title {
-    font-size: 14px;
+    font-size: 12px;
   }
   .author {
     color: #475569;
-    font-size: 12px;
+    font-size: 11px;
   }
   .rating {
     color: #475569;
-    font-size: 12px;
+    font-size: 11px;
   }
   .read-status {
     color: #0284c7;
-    font-size: 12px;
+    font-size: 11px;
   }
 }

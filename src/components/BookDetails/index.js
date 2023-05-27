@@ -5,6 +5,7 @@ import {BsFillStarFill} from 'react-icons/bs'
 import Cookies from 'js-cookie'
 import Header from '../Header'
 import Footer from '../Footer'
+import './index.css'
 
 const callStatusCodes = {
   loading: 'LOADING',
@@ -65,26 +66,37 @@ class BookDetails extends Component {
     const {bookDetailsList} = this.state
     return (
       <div>
-        <div>
-          <img src={bookDetailsList.cover} alt={bookDetailsList.title} />
-          <div>
-            <h1>{bookDetailsList.title}</h1>
-            <p>{bookDetailsList.author}</p>
-            <p>
-              Avg Rating: <BsFillStarFill /> {bookDetailsList.rating}
-            </p>
-            <p>
-              Status: <span>{bookDetailsList.readStatus}</span>
-            </p>
+        <div className="details-card-container">
+          <div className="shelf-item-container">
+            <img
+              className="shelf-img"
+              src={bookDetailsList.cover}
+              alt={bookDetailsList.title}
+            />
+            <div className="details-container">
+              <h1 className="title">{bookDetailsList.title}</h1>
+              <p className="author">{bookDetailsList.author}</p>
+              <p className="rating">
+                Avg Rating: <BsFillStarFill className="star" />{' '}
+                {bookDetailsList.rating}
+              </p>
+              <p className="rating">
+                Status:
+                <span className="read-status">
+                  {bookDetailsList.readStatus}
+                </span>
+              </p>
+            </div>
           </div>
           <hr />
-          <div>
+          <div className="additional-details">
             <h2>About Author</h2>
             <p>{bookDetailsList.aboutAuthor}</p>
             <h2>About Book</h2>
             <p>{bookDetailsList.aboutBook}</p>
           </div>
         </div>
+        <Footer />
       </div>
     )
   }
@@ -131,8 +143,7 @@ class BookDetails extends Component {
     return (
       <div>
         <Header />
-        <div>{this.renderPortView()}</div>
-        <Footer />
+        <div className="page-container">{this.renderPortView()}</div>
       </div>
     )
   }

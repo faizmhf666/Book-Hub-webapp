@@ -204,52 +204,54 @@ class Bookshelves extends Component {
     return (
       <div>
         <Header />
-        <div className="bookshelves-main-container">
-          <div className="top-search">
-            <input
-              type="search"
-              placeholder="search"
-              onChange={this.onSearchInput}
-              value={searchText}
-              className="search-input"
-            />
-            <button
-              type="button"
-              testid="searchButton"
-              onClick={this.onSearchSubmit}
-              className="search-button"
-            >
-              <BsSearch />
-            </button>
-          </div>
-          <div>{this.renderFilter()}</div>
-          <div className="non-filter-container">
-            <div className="bookshelves-label-search">
-              <h1 className="bookshelves-label-text">
-                {bookShelfLabel[0].label} Books
-              </h1>
-              <div className="bottom-search">
-                <input
-                  type="search"
-                  placeholder="search"
-                  onChange={this.onSearchInput}
-                  value={searchText}
-                  className="search-input"
-                />
-                <button
-                  type="button"
-                  testid="searchButton"
-                  onClick={this.onSearchSubmit}
-                  className="search-button"
-                >
-                  <BsSearch />
-                </button>
-              </div>
+        <div className="container-footer">
+          <div className="bookshelves-main-container">
+            <div className="top-search">
+              <input
+                type="search"
+                placeholder="search"
+                onChange={this.onSearchInput}
+                value={searchText}
+                className="search-input"
+              />
+              <button
+                type="button"
+                testid="searchButton"
+                onClick={this.onSearchSubmit}
+                className="search-button"
+              >
+                <BsSearch />
+              </button>
             </div>
-            <div>{this.renderPortView()}</div>
+            <div>{this.renderFilter()}</div>
+            <div className="non-filter-container">
+              <div className="bookshelves-label-search">
+                <h1 className="bookshelves-label-text">
+                  {bookShelfLabel[0].label} Books
+                </h1>
+                <div className="bottom-search">
+                  <input
+                    type="search"
+                    placeholder="search"
+                    onChange={this.onSearchInput}
+                    value={searchText}
+                    className="search-input"
+                  />
+                  <button
+                    type="button"
+                    testid="searchButton"
+                    onClick={this.onSearchSubmit}
+                    className="search-button"
+                  >
+                    <BsSearch />
+                  </button>
+                </div>
+              </div>
+              <div>{this.renderPortView()}</div>
+            </div>
           </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
     )
   }
