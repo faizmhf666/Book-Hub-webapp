@@ -74,7 +74,7 @@ class Login extends Component {
               id="username"
               onChange={this.inputUsername}
               value={username}
-              placeholder="Username"
+              placeholder="Username is rahul"
               className="input-box"
             />
             <label htmlFor="password" className="form-label">
@@ -85,7 +85,7 @@ class Login extends Component {
               id="password"
               onChange={this.inputPassword}
               value={password}
-              placeholder="Password"
+              placeholder="Password is rahul@2021"
               className="input-box"
             />
             {showLoginError && <p className="error-message">*{error}</p>}
